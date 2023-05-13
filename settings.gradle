@@ -1,0 +1,4 @@
+rootProject.name = 'HubbleCircuitBreaker'
+
+include 'Products'
+include 'Order'
