@@ -1,7 +1,9 @@
 package com.example.order.repository;
 
 import com.example.order.domain.ProductIncluded;
-import org.springframework.data.repository.reactive.ReactiveCrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface ProductIncludedRepository extends ReactiveCrudRepository<ProductIncluded, String> {
+@Repository
+public interface ProductIncludedRepository extends JpaRepository<ProductIncluded, String> {
 }

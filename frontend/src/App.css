@@ -1,0 +1,5 @@
+/* Transform all links to don't have underline and don't be blue */
+a {
+  text-decoration: none;
+  color: white;
+}

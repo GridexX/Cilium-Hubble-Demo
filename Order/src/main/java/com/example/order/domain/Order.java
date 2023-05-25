@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.annotations.UuidGenerator;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @AllArgsConstructor
@@ -14,19 +15,22 @@ import java.util.List;
 @Data
 @ToString
 @Entity
-@Table(name = "order")
+@Table(name = "order_entry")
 public class Order {
     @Id
-    @UuidGenerator
     @Column()
     private String Id;
 
     @Column()
     private String clientName;
 
-    @Column()
-    private Double totalPrice;
+    @Column(name = "date", columnDefinition = "TIMESTAMP")
+    private LocalDateTime date;
 
-    @OneToMany(mappedBy = "order")
+    @Column()
+    private String status;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "order")
     private List<ProductIncluded> productsIncluded;
 }
+
