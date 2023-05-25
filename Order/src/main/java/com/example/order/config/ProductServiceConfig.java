@@ -9,7 +9,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 public class ProductServiceConfig {
 
 	@Bean
-	public WebClient webClient(@Value("{spring.productservice.url") String url) {
+	public WebClient webClient(@Value("${spring.productservice.url}") String url) {
 		return WebClient.builder()
 			.baseUrl(url)
 			.defaultHeader("Content-Type", "application/json")

@@ -11,18 +11,18 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "product_included")
 @ToString(exclude = {"order"})
 public class ProductIncluded {
 
     @EmbeddedId
+    @JsonIgnore
     private ProductIncludedKey id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id")
     private Product product;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @MapsId("orderId")
     @JoinColumn(name = "order_id")
     @JsonIgnore

@@ -9,8 +9,4 @@ import reactor.core.publisher.Mono;
 public interface ProductsRepository extends ReactiveMongoRepository<Product, String> {
 
     Mono<Product> findById(String id);
-
-    Mono<Product> updateById(Product newValue);
-
-    Mono<Product> deleteProductById(String id);
 }
