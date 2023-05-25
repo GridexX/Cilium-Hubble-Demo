@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: spring-config-products
+data:
+  prod-config.json:
+    '{
+      spring.datasource.url=jdbc:postgresql://${POSTGRESQL_URL:polyshop-order-postgres}:5432/postgres
+      spring.datasource.username=postgres
+      spring.datasource.password=postgres
+      server.port=8080
+      spring.profiles.active=prod
+     }'

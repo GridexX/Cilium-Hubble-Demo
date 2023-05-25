@@ -1,0 +1,23 @@
+spring:
+  profiles:
+    active: dev
+server:
+  port: ${SERVER_PORT:8081}
+---
+spring:
+  config:
+    activate:
+      on-profile: dev 
+  datasource:
+    url: "jdbc:postgresql://localhost:5432/postgres"
+    username: "postgres"
+    password: "postgres"
+---    
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    url: ${POSTGRESQL_URL}
+    username: ${POSTGRESQL_USER}
+    password: ${POSTGRESQL_PASSWORD}

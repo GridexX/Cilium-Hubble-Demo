@@ -1,0 +1,104 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: polyshop-order-rework
+spec:
+  selector:
+    matchLabels:
+      app: polyshop-order-rework
+  template:
+    metadata:
+      labels:
+        app: polyshop-order-rework
+    spec:
+      containers:
+        - name: order
+          image: gridexx/polyshop-order-rework
+          imagePullPolicy: Always
+          env:
+            - name: SPRING_APPLICATION_JSON
+              valueFrom:
+                configMapKeyRef:
+                  name: spring-config-order
+                  key: prod-config.json
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: polyshop-products-rework
+spec:
+  selector:
+    matchLabels:
+      app: polyshop-products-rework
+  template:
+    metadata:
+      labels:
+        app: polyshop-products-rework
+    spec:
+      containers:
+        - name: order
+          image: gridexx/polyshop-products-rework
+          imagePullPolicy: Always
+          env:
+          - name: SPRING_APPLICATION_JSON
+            valueFrom:
+              configMapKeyRef:
+                name: spring-config-products
+                key: prod-config.json
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: polyshop-product-mongodb
+spec:
+  selector:
+    matchLabels:
+      app: polyshop-product-mongodb
+  template:
+    metadata:
+      labels:
+        app: polyshop-product-mongodb
+    spec:
+      containers:
+        - name: mongodb
+          image: bitnami/postgresql:14.1.0-debian-10-r31
+          imagePullPolicy: Always
+          env:
+          - name: MONGODB_DATABASE
+            value: products
+          - name: MONGODB_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:              
+                name: mongodb-secret
+                key: MONGODB_ROOT_PASSWORD
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: polyshop-order-postgres
+spec:
+  selector:
+    matchLabels:
+      app: polyshop-order-postgres
+  template:
+    metadata:
+      labels:
+        app: polyshop-order-postgres
+    spec:
+      containers:
+        - name: postgres
+          image: bitnami/postgresql:14.1.0-debian-10-r31
+          imagePullPolicy: Always
+          env:
+          - name: POSTGRESQL_DATABASE
+            value: postgres
+          - name: POSTGRESQL_USER
+            valueFrom:
+              secretKeyRef:              
+                name: postgres-secret
+                key: POSTGRESQL_USER
+          - name: POSTGRESQL_PASSWORD
+            valueFrom:
+              secretKeyRef:              
+                name: postgres-secret
+                key: POSTGRESQL_PASSWORD

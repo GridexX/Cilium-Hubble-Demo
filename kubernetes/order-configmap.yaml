@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: spring-config-order
+data:
+  prod-config.json:
+    '{
+      spring.data.mongodb.uri=mongodb://root:root@${MONGO_SERVICE:polyshop-product-mongodb}:27017/catalog?authSource=admin
+      server.port=8081
+      spring.profiles.active=prod
+     }'

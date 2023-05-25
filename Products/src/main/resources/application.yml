@@ -1,0 +1,21 @@
+spring:
+  profiles:
+    active: dev
+server:
+  port: ${SERVER_PORT:8080}
+---
+spring:
+  config:
+    activate:
+      on-profile: dev 
+  data:
+    mongodb:
+      uri: mongodb://root:root@localhost:27017/catalog?authSource=admin
+---    
+spring:
+  config:
+    activate:
+      on-profile: prod
+  data:
+    mongodb:
+      uri: ${MONGODB_URI}
