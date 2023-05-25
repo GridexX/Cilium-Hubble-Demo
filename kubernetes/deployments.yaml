@@ -102,3 +102,21 @@ spec:
               secretKeyRef:              
                 name: postgres-secret
                 key: POSTGRESQL_PASSWORD
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: polyshop-frontend-rework
+spec:
+  selector:
+    matchLabels:
+      app: polyshop-frontend-rework
+  template:
+    metadata:
+      labels:
+        app: polyshop-frontend-rework
+    spec:
+      containers:
+        - name: order
+          image: gridexx/polyshop-frontend-rework
+          imagePullPolicy: Always

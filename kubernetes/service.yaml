@@ -21,3 +21,15 @@ spec:
   selector:
     app: polyshop-order-postgres
   type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: polyshop-frontend-rework
+spec:
+  ports:
+    - port: 3000
+      targetPort: 80
+  selector:
+    app: polyshop-frontend-rework
+  type: LoadBalancer
