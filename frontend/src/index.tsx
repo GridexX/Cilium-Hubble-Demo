@@ -14,11 +14,11 @@ const queryClient = new QueryClient();
 
 root.render(
     <React.StrictMode>
-        <QueryClientProvider client={queryClient}>
-            <OrderProvider>
+        <OrderProvider>
+            <QueryClientProvider client={queryClient}>
                 <App />
-            </OrderProvider>
-        </QueryClientProvider>
+            </QueryClientProvider>
+        </OrderProvider>
     </React.StrictMode>
 );
 

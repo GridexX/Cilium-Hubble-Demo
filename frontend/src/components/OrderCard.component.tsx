@@ -14,6 +14,12 @@ export const OrderCard = ({ order }: OrderCardProps) => {
         (acc, product) => acc + product.quantity,
         0
     );
+    const totalPrice = order?.productsIncluded.reduce(
+        (acc, product) => acc + product.quantity * product.product.price,
+        0
+    );
+
+
 
 
     return (
@@ -76,6 +82,17 @@ export const OrderCard = ({ order }: OrderCardProps) => {
                                     <Skeleton />
                                 ) : (
                                     `Total produits: ${totalQuantity}`
+                                )}
+                            </Typography>                           
+                            <Typography
+                                variant="subtitle1"
+                                component="div"
+                                maxWidth={200}
+                            >
+                                {istOrderUndefined ? (
+                                    <Skeleton />
+                                ) : (
+                                    `Total : ${totalPrice}€`
                                 )}
                             </Typography>                           
                         </Grid>

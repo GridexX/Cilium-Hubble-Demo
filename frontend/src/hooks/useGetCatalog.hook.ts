@@ -1,6 +1,6 @@
 import axios, { AxiosError } from "axios";
-import { CATALOG_URL } from "../config/constants";
-import { useQuery } from "react-query";
+import { CATALOG_URL, DELAY_REFETCH_MS } from "../config/constants";
+import { useQuery, useQueryClient } from "react-query";
 import { ProductCatalog } from "./common";
 
 export const useGetCatalog = () => {
@@ -12,6 +12,8 @@ export const useGetCatalog = () => {
         return content;
     };
 
+    const queryClient = useQueryClient();
+
     const { isLoading, data, error } = useQuery<ProductCatalog[], AxiosError>(
         ["catalog", CATALOG_URL],
         getCatalog,
@@ -20,6 +22,13 @@ export const useGetCatalog = () => {
             refetchOnMount: false,
             refetchInterval: 900000,
             enabled: (CATALOG_URL?.length ?? 0) > 0,
+            onSuccess: () => {
+                setTimeout(() => {
+                    queryClient.invalidateQueries({
+                        queryKey: ["catalog", CATALOG_URL],
+                    });
+                }, DELAY_REFETCH_MS);
+            },
         }
     );
 

@@ -17,8 +17,5 @@ public class OrderDTO {
 	private Optional<String> id;
 
 	private String clientName;
-
-	private Double totalPrice;
-
 	private List<ProductIncludedDTO> productsIncluded;
 }

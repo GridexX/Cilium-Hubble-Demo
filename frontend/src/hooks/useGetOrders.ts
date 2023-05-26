@@ -1,6 +1,6 @@
 import axios, { AxiosError } from "axios";
-import { ORDERS_URL } from "../config/constants";
-import { useQuery } from "react-query";
+import { DELAY_REFETCH_MS, ORDERS_URL } from "../config/constants";
+import { useQuery, useQueryClient } from "react-query";
 import { Order, OrderDto } from "./common";
 import { useState } from "react";
 
@@ -21,15 +21,19 @@ export const useGetOrders = (): ReturnObject => {
 
     const [orders, setOrders] = useState<Order[] | undefined>(undefined);
 
+    const queryClient = useQueryClient();
+
     const { isLoading, error } = useQuery<OrderDto[], AxiosError>(
         ["get_orders", ORDERS_URL],
         getOrders,
         {
-            refetchOnWindowFocus: true,
-            refetchOnMount: true,
-            refetchInterval: 900000,
             enabled: ORDERS_URL.length > 0,
             onSuccess: (data) => {
+                setTimeout(() => {
+                    queryClient.invalidateQueries({
+                        queryKey: ["get_orders", ORDERS_URL],
+                    });
+                }, DELAY_REFETCH_MS);
                 setOrders(
                     data.map((order) => {
                         return {

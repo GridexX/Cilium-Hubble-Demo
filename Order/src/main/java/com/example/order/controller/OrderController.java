@@ -7,6 +7,7 @@ import com.example.order.services.ProductService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -17,7 +18,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-
+@CrossOrigin(origins = "*")
 @RestController
 public class OrderController {
 
@@ -88,8 +89,15 @@ public class OrderController {
 	}
 
 	@GetMapping("/orders")
-	private List<Order> findManyOrders(@RequestParam(value = "limit", defaultValue = "10") Integer limit, @RequestParam(value = "page", defaultValue = "1") Integer page) {
-		return orderRepository.findAll();
+	private ResponseEntity<List<Order>> findManyOrders(@RequestParam(value = "limit", defaultValue = "10") Integer limit, @RequestParam(value = "page", defaultValue = "1") Integer page) {
+		double random = Math.random();
+        if(random < .25) {
+            return ResponseEntity.internalServerError().build();
+        }
+        if(random < .5) {
+            return ResponseEntity.badRequest().build();
+        }
+		return ResponseEntity.ok().body(orderRepository.findAll());
 	}
 
 }

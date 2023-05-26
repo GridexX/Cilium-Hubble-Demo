@@ -19,7 +19,12 @@ export const ProductCard = ({ product }: ProductCardProps) => {
             <Card>
                 <CardContent>
                     <Link to={"/product/" + product?.id}>
-                        <Typography color="black" variant="h5" component="div" maxWidth={200}>
+                        <Typography
+                            color="black"
+                            variant="h5"
+                            component="div"
+                            maxWidth={200}
+                        >
                             {isProductUndefined ? <Skeleton /> : product?.name}
                         </Typography>
                     </Link>
@@ -46,17 +51,18 @@ export const ProductCard = ({ product }: ProductCardProps) => {
                     {isProductUndefined && <Skeleton width={100} height={30} />}
                     {!isProductUndefined && (
                         <>
-                            <Button size="small"
-                                href={`/product/${product?.id}`}
-                            >Voir plus</Button>
-                            <Button
-                                size="small"
-                                color="secondary"
-                                sx={{ marginLeft: 2 }}
-                                href={`/product/edit/${product.id}`}
-                            >
-                                Edit
-                            </Button>
+                            <Link to={`/product/${product?.id}`}>
+                                <Button size="small">Voir plus</Button>
+                            </Link>
+                            <Link to={`/product/edit/${product.id}`}>
+                                <Button
+                                    size="small"
+                                    color="secondary"
+                                    sx={{ marginLeft: 2 }}
+                                >
+                                    Edit
+                                </Button>
+                            </Link>
                         </>
                     )}
                 </CardActions>
