@@ -1,12 +1,15 @@
 FROM node:16-alpine AS build
 WORKDIR /app
+ENV NODE_ENV=production
 COPY package.json package-lock.json ./
 RUN npm install
 COPY . .
 RUN npm run build
 
-FROM nginx:1.21.1-alpine AS prod-stage
-COPY --from=build /app/build /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+FROM node:16-alpine AS prod
+WORKDIR /prod
+COPY --from=build /app/build /prod
+RUN npm install --global serve
+EXPOSE 3000
+CMD ["serve", "-l", "3000", "/prod"]
 

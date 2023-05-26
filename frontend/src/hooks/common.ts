@@ -50,3 +50,13 @@ export type Order = {
 
     productsIncluded: ProductItemDto[];
 };
+
+export type ProductOrderDTO = {
+    productId: string;
+    quantity: number;
+};
+
+export type PostOrderDTO = {
+    clientName: string;
+    productsIncluded: ProductOrderDTO[];
+};

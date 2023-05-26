@@ -14,8 +14,9 @@ import {
 import FormControl from "@mui/material/FormControl";
 import { useGetProduct } from "../hooks/useGetProduct.hook";
 import { useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { WarningOutlined } from "@mui/icons-material";
+import { OrderContext } from "../contexts/Order.context";
 
 export const ProductDetailPage = () => {
     //Retrieve the product Id from the URL after the /product/ path
@@ -39,16 +40,26 @@ export const ProductDetailPage = () => {
 
     const [amount, setAmount] = useState<string>("");
 
+    const { addProductOrderDTO } = useContext(OrderContext);
+
     const handleChangeAmount = (event: SelectChangeEvent) => {
         // Parse String to Number
         setAmount(event.target.value);
-        console.log(
-            "Amount: " +
-                event.target.value +
-                " Typoe: " +
-                typeof event.target.value
-        );
+
     };
+
+    const handleAddToOrder = () => {
+        const quantity = parseInt(amount);
+        console.log(quantity)
+        console.log(product)
+        if( !isNaN(quantity) && product !== undefined) {
+            addProductOrderDTO({
+                quantity,
+                productId: product.id
+            })
+        }
+    }
+
     return (
         <Box>
             {
@@ -108,6 +119,14 @@ export const ProductDetailPage = () => {
                     {!isProductUndefined && (
                         <>
 
+                            <Button
+                                size="small"
+                                color="primary"
+                                sx={{ marginLeft: 2 }}
+                                onClick={() => handleAddToOrder()}
+                            >
+                                Add to cart
+                            </Button>
                             <Button
                                 size="small"
                                 color="secondary"

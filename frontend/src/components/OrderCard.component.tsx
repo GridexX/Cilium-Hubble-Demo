@@ -36,10 +36,23 @@ export const OrderCard = ({ order }: OrderCardProps) => {
                                 {istOrderUndefined ? (
                                     <Skeleton />
                                 ) : (
-                                    `Order n°${order?.id}`
+                                    `Order`
                                 )}
                             </Typography>
                         
+                            <Typography
+                                variant="caption"
+                                component="div"
+                                color="text.secondary"
+                                maxWidth={400}
+                                minWidth={200}
+                            >
+                                {istOrderUndefined ? (
+                                    <Skeleton />
+                                ) : (
+                                    `#${order?.id}`
+                                )}
+                            </Typography>
                             <Typography
                                 variant="subtitle1"
                                 component="div"
@@ -49,7 +62,7 @@ export const OrderCard = ({ order }: OrderCardProps) => {
                                 {istOrderUndefined ? (
                                     <Skeleton />
                                 ) : (
-                                    `Date: ${order?.date.toLocaleDateString()}`
+                                    `Date: ${order?.date.toDateString()}`
                                 )}
                             </Typography>
                             </Grid>
@@ -64,19 +77,7 @@ export const OrderCard = ({ order }: OrderCardProps) => {
                                 ) : (
                                     `Total produits: ${totalQuantity}`
                                 )}
-                            </Typography>
-                            <Typography
-                                variant="subtitle1"
-                                component="div"
-                                maxWidth={200}
-                            >
-                                {istOrderUndefined ? (
-                                    <Skeleton />
-                                ) : (
-                                    `Total: ${order.totalPrice}€`
-                                )}
-                            </Typography>
-                            
+                            </Typography>                           
                         </Grid>
                     </Grid>
                     {istOrderUndefined ? (

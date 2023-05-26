@@ -1,3 +1,2 @@
-export const API_URL = process.env.REACT_APP_API_URL;
-export const CATALOG_URL = API_URL + "/products";
-export const ORDERS_URL = API_URL + "/orders";
+export const CATALOG_URL = process.env.REACT_APP_CATALOG_API_URL + "/products";
+export const ORDERS_URL = process.env.REACT_APP_ORDERS_API_URL + "/orders";

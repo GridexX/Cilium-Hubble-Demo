@@ -33,6 +33,9 @@ export default function ApplicationBar() {
                         <Typography variant="h6" component="div" margin={2}>
                             <Link to={"/orders"}>Orders</Link>
                         </Typography>
+                        <Typography variant="h6" component="div" margin={2}>
+                            <Link to={"/cart"}>Cart</Link>
+                        </Typography>
                         {/* <Button color="inherit">Login</Button> */}
                     </Toolbar>
                 </AppBar>
