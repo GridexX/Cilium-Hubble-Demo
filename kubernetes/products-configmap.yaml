@@ -5,9 +5,7 @@ metadata:
 data:
   prod-config.json:
     '{
-      spring.datasource.url=jdbc:postgresql://${POSTGRESQL_URL:polyshop-order-postgres}:5432/postgres
-      spring.datasource.username=postgres
-      spring.datasource.password=postgres
-      server.port=8080
-      spring.profiles.active=prod
+        "spring.data.mongodb.uri": "mongodb://root:root@polyshop-product-mongodb:27017/catalog?authSource=admin",
+        "server.port": 8081,
+        "spring.profiles.active": "prod"
      }'

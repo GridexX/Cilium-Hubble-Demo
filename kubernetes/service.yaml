@@ -33,3 +33,27 @@ spec:
   selector:
     app: polyshop-frontend-rework
   type: LoadBalancer
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: polyshop-order-rework
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: polyshop-order-rework
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: polyshop-products-rework
+spec:
+  ports:
+    - port: 8081
+      targetPort: 8081
+  selector:
+    app: polyshop-products-rework
+  type: LoadBalancer

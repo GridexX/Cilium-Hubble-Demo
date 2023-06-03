@@ -14,7 +14,7 @@ spec:
       containers:
         - name: order
           image: gridexx/polyshop-order-rework
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           env:
             - name: SPRING_APPLICATION_JSON
               valueFrom:
@@ -38,7 +38,7 @@ spec:
       containers:
         - name: order
           image: gridexx/polyshop-products-rework
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           env:
           - name: SPRING_APPLICATION_JSON
             valueFrom:
@@ -61,11 +61,11 @@ spec:
     spec:
       containers:
         - name: mongodb
-          image: bitnami/postgresql:14.1.0-debian-10-r31
-          imagePullPolicy: Always
+          image: bitnami/mongodb:4.4.14-debian-10-r33
+          imagePullPolicy: IfNotPresent
           env:
           - name: MONGODB_DATABASE
-            value: products
+            value: catalog
           - name: MONGODB_ROOT_PASSWORD
             valueFrom:
               secretKeyRef:              
@@ -88,7 +88,7 @@ spec:
       containers:
         - name: postgres
           image: bitnami/postgresql:14.1.0-debian-10-r31
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           env:
           - name: POSTGRESQL_DATABASE
             value: postgres
@@ -119,4 +119,4 @@ spec:
       containers:
         - name: order
           image: gridexx/polyshop-frontend-rework
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent

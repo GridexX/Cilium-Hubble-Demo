@@ -1,0 +1,32 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: polyshop-frontend-rework-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+    - host: polyshop.local
+      http:
+        paths:
+          - path: /app
+            pathType: Prefix
+            backend:
+              service:
+                name: polyshop-frontend-rework
+                port:
+                  number: 3000
+          - path: /api/order/*
+            pathType: Prefix
+            backend:
+              service:
+                name: polyshop-order-rework
+                port:
+                  number: 3000
+          - path: /api/product/*
+            pathType: Prefix
+            backend:
+              service:
+                name: polyshop-product-rework
+                port:
+                  number: 3000
